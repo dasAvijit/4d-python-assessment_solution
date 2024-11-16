@@ -27,6 +27,6 @@ SALES_CONFIG = {
 
 CONFIGS = {
     "customer": CUSTOMER_CONFIG,
-    # "sales": SALES_CONFIG,
+    "sales": SALES_CONFIG,
     # "product": PRODUCT_CONFIG
 }
