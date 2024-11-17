@@ -4,6 +4,7 @@ from src.utils.files import get_saved_file, save_file, get_save_filename
 from src.utils.validation import validate_data
 import pandas as pd
 from uuid import uuid4
+from datetime import datetime
 
 
 def apply_scd2(old_df, new_df, key_cols, date, is_full=False):
@@ -141,7 +142,9 @@ def process_data(source_name, dataframe, config, date):
 
     if len(error_records) > 0:
         sys_logger.warning(f"Found {len(error_records)} error records for {source_name}")
-        #TODO: save error records to a file
+        #Ticket MIDP-313 resolution
+        current_date = datetime.now().strftime('%Y%m%d')
+        error_records.to_csv(f'./final_results/error_reports/errors_{source_name}_{current_date}.csv', index=False)
 
     new_table = apply_scd2(
         current_table,
